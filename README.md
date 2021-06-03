@@ -34,7 +34,7 @@ Once authenticated, use Authorization header to include provided token.
 ```json
 {
     "title": "yolo",
-    "body": "text here",
+    "text": "text here",
     "date": "2020-12-12"
 }
 ```

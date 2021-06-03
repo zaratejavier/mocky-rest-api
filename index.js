@@ -58,9 +58,9 @@ app.get(V1 + '/items/:id', authenticate, (req, res) => {
 });
 
 app.post(V1 + '/items', authenticate, (req, res) => {
-   const {title, body, date} = req.body;
+   const {title, text, date} = req.body;
    if (!validateItem(req.body)) return res.sendStatus(400);
-   const item = {title, body, date};
+   const item = {title, text, date};
    items.push(item);
    res.send(item);
 });
@@ -68,9 +68,9 @@ app.post(V1 + '/items', authenticate, (req, res) => {
 app.put(V1 + '/items/:id', authenticate, (req, res) => {
    const id = req.params.id;
    if (!items[id]) return res.sendStatus(404);
-   const {title, body, date} = req.body;
+   const {title, text, date} = req.body;
    if (!validateItem(req.body)) return res.sendStatus(400);
-   items[id] = {title, body, date};
+   items[id] = {title, text, date};
    res.send({id, ...items[id]});
 });
 
@@ -82,7 +82,7 @@ app.delete(V1 + '/items/:id', authenticate, (req, res) => {
 });
 
 function validateItem(data = {}) {
-   if (!data.title || !data.body || !data.date) return false;
+   if (!data.title || !data.text || !data.date) return false;
    const date = moment(data.date, 'YYYY-MM-DD', true);
    return date.isValid();
 }
